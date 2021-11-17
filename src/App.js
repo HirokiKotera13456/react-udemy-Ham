@@ -1,21 +1,27 @@
-import React , {useState} from 'react';
+import React , {useEffect,useState} from 'react';
 
 const  App = props => {
-  const [name,setName] = useState(props.name)
-  const [price,setPrice] = useState(props.price)
+  const [state,setState] = useState(props)
 
   const reset = () => {
-    setPrice(props.price)
-    setName(props.name)
+    setState(props)
   }
+  const {name ,price} = state
+
+  useEffect( ()=>{
+    console.log('This is like componentsDidMount or componentDidUpdate')
+  })
+  useEffect( ()=>{
+    console.log('This callback is for name only ')
+  },[name])
 
   return (
     <>
-    <p>現在の{name}は、{price}円です</p>
-    <button onClick={() => setPrice(price + 1)}>+1</button>
-    <button onClick={() => setPrice(price - 1)}>-1</button>
+    <p>現在の{name}は、{price}円です </p>
+    <button onClick={() => setState({...state,price: price + 1})}>+1</button>
+    <button onClick={() => setState({...state,price: price - 1})}>-1</button>
     <button onClick={reset}>Reset</button>
-    <input value={name} 　onChange={e => setName(e.target.value)}/>
+    <input value={name} 　onChange={e => setState({...state, name: e.target.value})}/>
     </>
   )
 }
