@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Reducer from "../reducers"
 
 const App = () => {
   return (
